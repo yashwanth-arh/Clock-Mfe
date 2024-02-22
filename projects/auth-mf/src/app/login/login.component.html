@@ -1,0 +1,101 @@
+<div
+  class="h-screen flex justify-center items-center bg-main-bg"
+  style="background-repeat: no-repeat; background-size: cover"
+>
+  <div
+    *ngIf="!isOtpPage"
+    class="p-pad5 glassFilter md:w-1/2 flex justify-center gap-gap5"
+  >
+    <form [formGroup]="loginForm" class="flex flex-col w-full">
+      <div class="self-center">
+        <img src="../../assets/logo/Logo.png" width="200" />
+      </div>
+      <div class="mb-3 text-center">
+        <span class="text-3xl font-medium text-textWhite">Sign-In</span>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Email:</mat-label>
+          <input matInput formControlName="username" required />
+
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Password:</mat-label>
+          <input matInput formControlName="password" required />
+
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <a
+        class="self-end cursor-pointer text-linkColor underline leading-3"
+        routerLink="/forgot-password"
+        >Forgot password</a
+      >
+      <div class="text-center">
+        <button
+          type="submit"
+          (click)="onLogin($event)"
+          class="rounded-3xl w-48 bg-submitBtnColor px-3 py-2 text-sm font-normal text-white shadow-sm hover:bg-submitBtnHover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-3 me-2"
+        >
+          Sing In
+        </button>
+      </div>
+    </form>
+  </div>
+  <div
+    *ngIf="isOtpPage"
+    class="p-pad5 glassFilter md:w-1/2 flex flex-col justify-center gap-gap5"
+  >
+    <img src="assets/images/Back.png" class="back-btn" (click)="goToLogin()" />
+    <form class="flex flex-col w-full">
+      <div class="self-center">
+        <img src="../../assets/logo/Logo.png" width="200" />
+      </div>
+      <div class="mb-3 text-center otp-text">
+        <span class="font-medium text-textWhite"
+          >We have sent an OTP to your registered email. Please enter OTP to
+          authenticate and proceed to login
+        </span>
+      </div>
+
+      <ng-otp-input
+        appNumberCustomValidation
+        type="number"
+        [config]="{ length: 6 }"
+        class="text-center"
+        (onInputChange)="otp($event)"
+      ></ng-otp-input>
+      <div class="hrLine"></div>
+      <div class="otp-bottom flex justify-between">
+        <div class="otp-timmer">
+          {{ display + " " + "Sec" }}
+        </div>
+        <button
+          mat-button
+          type="button"
+          [ngStyle]="{ opacity: !enableResendOTP ? '0.5' : '1' }"
+          [disabled]="!enableResendOTP"
+          class="txt4"
+          (click)="onLogin($event)"
+        >
+          Resend OTP
+        </button>
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          (click)="onLoginValidOtp($event)"
+          class="rounded-3xl w-48 bg-submitBtnColor px-3 py-2 text-sm font-normal text-white shadow-sm hover:bg-submitBtnHover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-3 me-2"
+        >
+          Validate Otp
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,7 +1,1057 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"host-app": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/host-app",
+			"sourceRoot": "projects/host-app/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/host-app",
+						"index": "projects/host-app/src/index.html",
+						"main": "projects/host-app/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/host-app/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/host-app/src/favicon.ico",
+							"projects/host-app/src/assets"
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"projects/host-app/src/styles.scss",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/host-app/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/host-app/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "host-app:build:production",
+							"extraWebpackConfig": "projects/host-app/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "host-app:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/host-app/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "host-app:build",
+						"extraWebpackConfig": "projects/host-app/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/host-app/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/host-app/src/favicon.ico",
+							"projects/host-app/src/assets"
+						],
+						"styles": [
+							"projects/host-app/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"auth-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/auth-mf",
+			"sourceRoot": "projects/auth-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/auth-mf",
+						"index": "projects/auth-mf/src/index.html",
+						"main": "projects/auth-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/auth-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/auth-mf/src/favicon.ico",
+							"projects/auth-mf/src/assets"
+						],
+						"styles": [
+							"@angular/material/prebuilt-themes/indigo-pink.css",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"projects/auth-mf/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/auth-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/auth-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "auth-mf:build:production",
+							"extraWebpackConfig": "projects/auth-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "auth-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5200,
+						"publicHost": "http://localhost:5200",
+						"extraWebpackConfig": "projects/auth-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "auth-mf:build",
+						"extraWebpackConfig": "projects/auth-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/auth-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/auth-mf/src/favicon.ico",
+							"projects/auth-mf/src/assets"
+						],
+						"styles": [
+							"@angular/material/prebuilt-themes/indigo-pink.css",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"projects/auth-mf/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"graphs-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/graphs-mf",
+			"sourceRoot": "projects/graphs-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/graphs-mf",
+						"index": "projects/graphs-mf/src/index.html",
+						"main": "projects/graphs-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/graphs-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/graphs-mf/src/favicon.ico",
+							"projects/graphs-mf/src/assets"
+						],
+						"styles": [
+							"projects/graphs-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/graphs-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/graphs-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "graphs-mf:build:production",
+							"extraWebpackConfig": "projects/graphs-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "graphs-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5400,
+						"publicHost": "http://localhost:5400",
+						"extraWebpackConfig": "projects/graphs-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "graphs-mf:build",
+						"extraWebpackConfig": "projects/graphs-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/graphs-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/graphs-mf/src/favicon.ico",
+							"projects/graphs-mf/src/assets"
+						],
+						"styles": [
+							"projects/graphs-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"medicalRecords-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/medical-records-mf",
+			"sourceRoot": "projects/medical-records-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/medical-records-mf",
+						"index": "projects/medical-records-mf/src/index.html",
+						"main": "projects/medical-records-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/medical-records-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/medical-records-mf/src/favicon.ico",
+							"projects/medical-records-mf/src/assets"
+						],
+						"styles": [
+							"projects/medical-records-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/medical-records-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/medical-records-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "medicalRecords-mf:build:production",
+							"extraWebpackConfig": "projects/medical-records-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "medicalRecords-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5500,
+						"publicHost": "http://localhost:5500",
+						"extraWebpackConfig": "projects/medical-records-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "medicalRecords-mf:build",
+						"extraWebpackConfig": "projects/medical-records-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/medical-records-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/medical-records-mf/src/favicon.ico",
+							"projects/medical-records-mf/src/assets"
+						],
+						"styles": [
+							"projects/medical-records-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"patientManagement-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/patient-management-mf",
+			"sourceRoot": "projects/patient-management-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/patient-management-mf",
+						"index": "projects/patient-management-mf/src/index.html",
+						"main": "projects/patient-management-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/patient-management-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/patient-management-mf/src/favicon.ico",
+							"projects/patient-management-mf/src/assets"
+						],
+						"styles": [
+							"projects/patient-management-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/patient-management-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/patient-management-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "patientManagement-mf:build:production",
+							"extraWebpackConfig": "projects/patient-management-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "patientManagement-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5600,
+						"publicHost": "http://localhost:5600",
+						"extraWebpackConfig": "projects/patient-management-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "patientManagement-mf:build",
+						"extraWebpackConfig": "projects/patient-management-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/patient-management-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/patient-management-mf/src/favicon.ico",
+							"projects/patient-management-mf/src/assets"
+						],
+						"styles": [
+							"projects/patient-management-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"scheduleCalls-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/schedule-calls-mf",
+			"sourceRoot": "projects/schedule-calls-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/schedule-calls-mf",
+						"index": "projects/schedule-calls-mf/src/index.html",
+						"main": "projects/schedule-calls-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/schedule-calls-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/schedule-calls-mf/src/favicon.ico",
+							"projects/schedule-calls-mf/src/assets"
+						],
+						"styles": [
+							"projects/schedule-calls-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/schedule-calls-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/schedule-calls-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "scheduleCalls-mf:build:production",
+							"extraWebpackConfig": "projects/schedule-calls-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "scheduleCalls-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5700,
+						"publicHost": "http://localhost:5700",
+						"extraWebpackConfig": "projects/schedule-calls-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "scheduleCalls-mf:build",
+						"extraWebpackConfig": "projects/schedule-calls-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/schedule-calls-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/schedule-calls-mf/src/favicon.ico",
+							"projects/schedule-calls-mf/src/assets"
+						],
+						"styles": [
+							"projects/schedule-calls-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"vitalHistory-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/vital-history-mf",
+			"sourceRoot": "projects/vital-history-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/vital-history-mf",
+						"index": "projects/vital-history-mf/src/index.html",
+						"main": "projects/vital-history-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/vital-history-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/vital-history-mf/src/favicon.ico",
+							"projects/vital-history-mf/src/assets"
+						],
+						"styles": [
+							"projects/vital-history-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/vital-history-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/vital-history-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "vitalHistory-mf:build:production",
+							"extraWebpackConfig": "projects/vital-history-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "vitalHistory-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5900,
+						"publicHost": "http://localhost:5900",
+						"extraWebpackConfig": "projects/vital-history-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "vitalHistory-mf:build",
+						"extraWebpackConfig": "projects/vital-history-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/vital-history-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/vital-history-mf/src/favicon.ico",
+							"projects/vital-history-mf/src/assets"
+						],
+						"styles": [
+							"projects/vital-history-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"dashboards-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/dashboards-mf",
+			"sourceRoot": "projects/dashboards-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/dashboards-mf",
+						"index": "projects/dashboards-mf/src/index.html",
+						"main": "projects/dashboards-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/dashboards-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/dashboards-mf/src/favicon.ico",
+							"projects/dashboards-mf/src/assets"
+						],
+						"styles": [
+							"projects/dashboards-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/dashboards-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/dashboards-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "dashboards-mf:build:production",
+							"extraWebpackConfig": "projects/dashboards-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "dashboards-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5300,
+						"publicHost": "http://localhost:5300",
+						"extraWebpackConfig": "projects/dashboards-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "dashboards-mf:build",
+						"extraWebpackConfig": "projects/dashboards-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/dashboards-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/dashboards-mf/src/favicon.ico",
+							"projects/dashboards-mf/src/assets"
+						],
+						"styles": [
+							"projects/dashboards-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"supportTicket-mf": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/support-ticket-mf",
+			"sourceRoot": "projects/support-ticket-mf/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/support-ticket-mf",
+						"index": "projects/support-ticket-mf/src/index.html",
+						"main": "projects/support-ticket-mf/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/support-ticket-mf/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/support-ticket-mf/src/favicon.ico",
+							"projects/support-ticket-mf/src/assets"
+						],
+						"styles": [
+							"projects/support-ticket-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/support-ticket-mf/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/host-app/src/environments/environment.ts",
+									"with": "projects/host-app/src/environments/environment.prod.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/support-ticket-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "supportTicket-mf:build:production",
+							"extraWebpackConfig": "projects/support-ticket-mf/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "supportTicket-mf:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5800,
+						"publicHost": "http://localhost:5800",
+						"extraWebpackConfig": "projects/support-ticket-mf/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "supportTicket-mf:build",
+						"extraWebpackConfig": "projects/support-ticket-mf/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/support-ticket-mf/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/support-ticket-mf/src/favicon.ico",
+							"projects/support-ticket-mf/src/assets"
+						],
+						"styles": [
+							"projects/support-ticket-mf/src/styles.scss",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"@angular/material/prebuilt-themes/indigo-pink.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": "f5c1e243-167b-4b6d-bfd5-0e2e3abd7afb"
+	}
 }
